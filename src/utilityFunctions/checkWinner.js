@@ -1,8 +1,10 @@
 const checkWinner = (x, y, fieldSize, field) => {
-  checkHorizontalWinner(x, y, fieldSize, field);
-  checkVerticalWinner(x, y, fieldSize, field);
-  checkDiagonalWinnerOne(x, y, fieldSize, field);
-  checkDiagonalWinnerTwo(x, y, fieldSize, field);
+  return (
+    checkHorizontalWinner(x, y, fieldSize, field) ||
+    checkVerticalWinner(x, y, fieldSize, field) ||
+    checkDiagonalWinnerOne(x, y, fieldSize, field) ||
+    checkDiagonalWinnerTwo(x, y, fieldSize, field)
+  );
 };
 
 const checkVerticalWinner = (x, y, fieldSize, field) => {
@@ -22,6 +24,9 @@ const checkVerticalWinner = (x, y, fieldSize, field) => {
   }
   if (point === 4) {
     alert("vertical winner");
+    return true;
+  } else {
+    return false;
   }
 };
 
@@ -42,6 +47,9 @@ const checkHorizontalWinner = (x, y, fieldSize, field) => {
   }
   if (point === 4) {
     alert("horizontal winner");
+    return true;
+  } else {
+    return false;
   }
 };
 
@@ -66,6 +74,9 @@ const checkDiagonalWinnerOne = (x, y, fieldSize, field) => {
 
   if (point === 4) {
     alert("diagonal1 winner");
+    return true;
+  } else {
+    return false;
   }
 };
 
@@ -88,6 +99,9 @@ const checkDiagonalWinnerTwo = (x, y, fieldSize, field) => {
   }
   if (point === 4) {
     alert("diagonal2 winner");
+    return true;
+  } else {
+    return false;
   }
 };
 
