@@ -12,13 +12,23 @@ const checkVerticalWinner = (x, y, fieldSize, field) => {
   let yPos = y;
   let point = 0;
   let type = field[x][y];
-  while (xPos < 10 && xPos <= fieldSize && field[xPos][yPos] === type) {
+  while (
+    // xPos >= 0 &&
+    // xPos <= fieldSize &&
+    field[xPos] !== undefined &&
+    field[xPos][yPos] === type
+  ) {
     xPos++;
     point++;
   }
   xPos = x - 1;
   yPos = y;
-  while (xPos >= 0 && xPos <= fieldSize && field[xPos][yPos] === type) {
+  while (
+    // xPos >= 0 &&
+    // xPos <= fieldSize &&
+    field[xPos] !== undefined &&
+    field[xPos][yPos] === type
+  ) {
     xPos--;
     point++;
   }
@@ -34,13 +44,13 @@ const checkHorizontalWinner = (x, y, fieldSize, field) => {
   let yPos = y + 1;
   let point = 0;
   let type = field[x][y];
-  while (field[xPos][yPos] === type) {
+  while (field[xPos] !== undefined && field[xPos][yPos] === type) {
     yPos++;
     point++;
   }
   xPos = x;
   yPos = y - 1;
-  while (field[xPos][yPos] === type) {
+  while (field[xPos] !== undefined && field[xPos][yPos] === type) {
     yPos--;
     point++;
   }
@@ -56,14 +66,14 @@ const checkDiagonalWinnerOne = (x, y, fieldSize, field) => {
   let yPos = y + 1;
   let point = 0;
   let type = field[x][y];
-  while (xPos < 10 && xPos <= fieldSize && field[xPos][yPos] === type) {
+  while (field[xPos] !== undefined && field[xPos][yPos] === type) {
     xPos++;
     yPos++;
     point++;
   }
   xPos = x - 1;
   yPos = y - 1;
-  while (xPos >= 0 && xPos <= fieldSize && field[xPos][yPos] === type) {
+  while (field[xPos] !== undefined && field[xPos][yPos] === type) {
     xPos--;
     yPos--;
     point++;
@@ -80,14 +90,14 @@ const checkDiagonalWinnerTwo = (x, y, fieldSize, field) => {
   let yPos = y - 1;
   let point = 0;
   let type = field[x][y];
-  while (xPos < 10 && xPos <= fieldSize && field[xPos][yPos] === type) {
+  while (field[xPos] !== undefined && field[xPos][yPos] === type) {
     xPos++;
     yPos--;
     point++;
   }
   xPos = x - 1;
   yPos = y + 1;
-  while (xPos >= 0 && xPos <= fieldSize && field[xPos][yPos] === type) {
+  while (field[xPos] !== undefined && field[xPos][yPos] === type) {
     xPos--;
     yPos++;
     point++;
