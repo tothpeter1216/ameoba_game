@@ -57,6 +57,7 @@ const Game = () => {
             value={fieldSize}
             min="5"
             max="10"
+            required
           />
           <button type="submit">Start</button>
         </form>
