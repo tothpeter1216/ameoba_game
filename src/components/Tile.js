@@ -25,7 +25,7 @@ const Tile = ({ type, rowNumber, tileNumber, handleTileClick }) => {
   }
   return (
     <div className={className} onClick={handleClick}>
-      {rowNumber}:{tileNumber}={type}
+      {/* {rowNumber}:{tileNumber}={type} */}
     </div>
   );
 };

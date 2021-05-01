@@ -22,8 +22,7 @@ const checkVerticalWinner = (x, y, fieldSize, field) => {
     xPos--;
     point++;
   }
-  if (point === 4) {
-    alert("vertical winner");
+  if (point >= 4) {
     return true;
   } else {
     return false;
@@ -45,8 +44,7 @@ const checkHorizontalWinner = (x, y, fieldSize, field) => {
     yPos--;
     point++;
   }
-  if (point === 4) {
-    alert("horizontal winner");
+  if (point >= 4) {
     return true;
   } else {
     return false;
@@ -62,7 +60,6 @@ const checkDiagonalWinnerOne = (x, y, fieldSize, field) => {
     xPos++;
     yPos++;
     point++;
-    console.log("diagonal", point);
   }
   xPos = x - 1;
   yPos = y - 1;
@@ -71,9 +68,7 @@ const checkDiagonalWinnerOne = (x, y, fieldSize, field) => {
     yPos--;
     point++;
   }
-
-  if (point === 4) {
-    alert("diagonal1 winner");
+  if (point >= 4) {
     return true;
   } else {
     return false;
@@ -82,7 +77,7 @@ const checkDiagonalWinnerOne = (x, y, fieldSize, field) => {
 
 const checkDiagonalWinnerTwo = (x, y, fieldSize, field) => {
   let xPos = x + 1;
-  let yPos = y + 1;
+  let yPos = y - 1;
   let point = 0;
   let type = field[x][y];
   while (xPos < 10 && xPos <= fieldSize && field[xPos][yPos] === type) {
@@ -97,8 +92,7 @@ const checkDiagonalWinnerTwo = (x, y, fieldSize, field) => {
     yPos++;
     point++;
   }
-  if (point === 4) {
-    alert("diagonal2 winner");
+  if (point >= 4) {
     return true;
   } else {
     return false;

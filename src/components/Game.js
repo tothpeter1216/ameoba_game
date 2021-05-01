@@ -3,11 +3,7 @@ import Row from "./Row";
 import checkWinner from "../utilityFunctions/checkWinner";
 
 const Game = () => {
-  const [field, setfield] = useState([
-    [0, 0, 0],
-    [0, 0, 0],
-    [0, 0, 0],
-  ]);
+  const [field, setfield] = useState([]);
   const [gameState, setgameState] = useState(0);
   const [isFirstPlayer, setIsFirstPlayer] = useState(true);
   const [fieldSize, setfieldSize] = useState(10);
@@ -35,7 +31,6 @@ const Game = () => {
       }
       newField.push(newRow);
     }
-    console.log(newField);
     setfield(newField);
     setgameState(1);
   };
