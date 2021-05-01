@@ -1,6 +1,22 @@
 body {
   background-color: #2c2c2c;
-  color: rgb(235, 235, 235);
+  color: #ebebeb;
+  font-size: 130%;
+}
+
+button {
+  background-color: #2c2c2c;
+  color: #ebebeb;
+  border: 2px solid white;
+  border-radius: 20%;
+  /* height: 40px; */
+  font-size: 18px;
+  padding: 10px;
+  margin: 10px;
+}
+
+button:hover {
+  background-color: #5f5f5f;
 }
 
 .row {
