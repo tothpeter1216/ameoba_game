@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Row from "./Row";
 import { checkWinner, checkDraw } from "../utilityFunctions/checkWinner";
+import Field from "./Field";
+import GameStart from "./GameStart";
 
 const Game = () => {
   const [field, setfield] = useState([]);
@@ -48,21 +50,13 @@ const Game = () => {
   return (
     <div>
       <h1>Amőba</h1>
+
       {gameState === 0 && (
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="fieldSize">Add meg az amőba pálya méretét: </label>
-          <input
-            type="number"
-            name="fieldSize"
-            id="fieldSize"
-            onChange={handleFieldSizeChange}
-            value={fieldSize}
-            min="5"
-            max="10"
-            required
-          />
-          <button type="submit">Start</button>
-        </form>
+        <GameStart
+          handleSubmit={handleSubmit}
+          handleFieldSizeChange={handleFieldSizeChange}
+          fieldSize={fieldSize}
+        />
       )}
 
       {gameState === 2 && (
@@ -83,20 +77,7 @@ const Game = () => {
 
       {gameState === 1 && <p>{isFirstPlayer ? "Játékos: 1" : "Játékos: 2"}</p>}
 
-      {gameState && (
-        <div id="field">
-          {field.map((e, i) => {
-            return (
-              <Row
-                rowInfo={e}
-                rowNumber={i}
-                key={i}
-                handleTileClick={handleTileClick}
-              />
-            );
-          })}
-        </div>
-      )}
+      {gameState && <Field field={field} handleTileClick={handleTileClick} />}
     </div>
   );
 };
