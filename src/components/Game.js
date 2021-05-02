@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Row from "./Row";
-import checkWinner from "../utilityFunctions/checkWinner";
+import { checkWinner, checkDraw } from "../utilityFunctions/checkWinner";
 
 const Game = () => {
   const [field, setfield] = useState([]);
@@ -15,6 +15,8 @@ const Game = () => {
       setfield(newField);
       if (checkWinner(x, y, fieldSize, field)) {
         setgameState(2);
+      } else if (checkDraw(field)) {
+        setgameState(3);
       } else {
         setIsFirstPlayer(!isFirstPlayer);
       }
@@ -68,6 +70,13 @@ const Game = () => {
           <p>
             Játék vége. A győztes: {isFirstPlayer ? "Játékos1" : "Játékos2"}
           </p>
+          <button onClick={handleStartNewGameClick}>Új játék</button>
+        </div>
+      )}
+
+      {gameState === 3 && (
+        <div>
+          <p>Játék vége. Döntetlen.</p>
           <button onClick={handleStartNewGameClick}>Új játék</button>
         </div>
       )}

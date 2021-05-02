@@ -1,4 +1,4 @@
-const checkWinner = (x, y, fieldSize, field) => {
+export const checkWinner = (x, y, fieldSize, field) => {
   return (
     checkHorizontalWinner(x, y, fieldSize, field) ||
     checkVerticalWinner(x, y, fieldSize, field) ||
@@ -109,4 +109,11 @@ const checkDiagonalWinnerTwo = (x, y, fieldSize, field) => {
   }
 };
 
-export default checkWinner;
+export const checkDraw = (field) => {
+  if (!field.some((row) => row.includes(0))) {
+    return true;
+  }
+};
+
+// export default checkWinner;
+// export { checkWinner, checkDraw };
