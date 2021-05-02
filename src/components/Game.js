@@ -11,22 +11,24 @@ let gamePhase = {
 };
 
 const Game = () => {
-  const [field, setfield] = useState([]);
-  const [gameState, setgameState] = useState(gamePhase.START);
-  const [isFirstPlayer, setIsFirstPlayer] = useState(true);
-  const [fieldSize, setfieldSize] = useState(10);
+  const [gameData, setGameData] = useState({
+    field: [],
+    gameState: gamePhase.START,
+    isFirstPlayer: true,
+    fieldSize: 10,
+  });
 
   const handleTileClick = (x, y) => {
-    if (gameState === gamePhase.GAME) {
-      let newField = [...field];
-      isFirstPlayer ? (newField[x][y] = 1) : (newField[x][y] = 2);
-      setfield(newField);
-      if (checkWinner(x, y, fieldSize, field)) {
-        setgameState(gamePhase.WINNER);
-      } else if (checkDraw(field)) {
-        setgameState(gamePhase.DRAW);
+    if (gameData.gameState === gamePhase.GAME) {
+      let newField = [...gameData.field];
+      gameData.isFirstPlayer ? (newField[x][y] = 1) : (newField[x][y] = 2);
+      setGameData({ ...gameData, field: newField });
+      if (checkWinner(x, y, gameData.fieldSize, gameData.field)) {
+        setGameData({ ...gameData, gameState: gamePhase.WINNER });
+      } else if (checkDraw(gameData.field)) {
+        setGameData({ ...gameData, gameState: gamePhase.DRAW });
       } else {
-        setIsFirstPlayer(!isFirstPlayer);
+        setGameData({ ...gameData, isFirstPlayer: !gameData.isFirstPlayer });
       }
     }
   };
@@ -34,62 +36,63 @@ const Game = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     let newField = [];
-    for (let i = 0; i < fieldSize; i++) {
+    for (let i = 0; i < gameData.fieldSize; i++) {
       let newRow = [];
-      for (let j = 0; j < fieldSize; j++) {
+      for (let j = 0; j < gameData.fieldSize; j++) {
         newRow.push(0);
       }
       newField.push(newRow);
     }
-    setfield(newField);
-    setgameState(1);
+    console.log(newField);
+    setGameData({ ...gameData, field: newField, gameState: gamePhase.GAME });
   };
 
   const handleFieldSizeChange = (e) => {
-    setfieldSize(e.target.value);
+    setGameData({ ...gameData, fieldSize: e.target.value });
   };
 
   const handleStartNewGameClick = () => {
-    setgameState(0);
+    setGameData({ ...gameData, gameState: gamePhase.START });
   };
 
   return (
     <div>
       <h1>Amőba</h1>
 
-      {gameState === gamePhase.START && (
+      {gameData.gameState === gamePhase.START && (
         <GameStart
           handleSubmit={handleSubmit}
           handleFieldSizeChange={handleFieldSizeChange}
-          fieldSize={fieldSize}
+          fieldSize={gameData.fieldSize}
         />
       )}
 
-      {gameState === gamePhase.WINNER && (
+      {gameData.gameState === gamePhase.WINNER && (
         <div>
           <p>
-            Játék vége. A győztes: {isFirstPlayer ? "Játékos1" : "Játékos2"}
+            Játék vége. A győztes:{" "}
+            {gameData.isFirstPlayer ? "Játékos1" : "Játékos2"}
           </p>
           <button onClick={handleStartNewGameClick}>Új játék</button>
         </div>
       )}
 
-      {gameState === gamePhase.DRAW && (
+      {gameData.gameState === gamePhase.DRAW && (
         <div>
           <p>Játék vége. Döntetlen.</p>
           <button onClick={handleStartNewGameClick}>Új játék</button>
         </div>
       )}
 
-      {gameState === gamePhase.GAME && (
+      {gameData.gameState === gamePhase.GAME && (
         <div>
-          <p>{isFirstPlayer ? "Játékos: X" : "Játékos: O"}</p>
+          <p>{gameData.isFirstPlayer ? "Játékos: X" : "Játékos: O"}</p>
           <button onClick={handleStartNewGameClick}>Új játék</button>
         </div>
       )}
 
-      {gameState !== gamePhase.START && (
-        <Field field={field} handleTileClick={handleTileClick} />
+      {gameData.gameState !== gamePhase.START && (
+        <Field field={gameData.field} handleTileClick={handleTileClick} />
       )}
     </div>
   );
