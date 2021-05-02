@@ -1,24 +1,30 @@
 import React, { useState } from "react";
-import Row from "./Row";
 import { checkWinner, checkDraw } from "../utilityFunctions/checkWinner";
 import Field from "./Field";
 import GameStart from "./GameStart";
 
+let gamePhase = {
+  START: 0,
+  GAME: 1,
+  WINNER: 2,
+  DRAW: 3,
+};
+
 const Game = () => {
   const [field, setfield] = useState([]);
-  const [gameState, setgameState] = useState(0);
+  const [gameState, setgameState] = useState(gamePhase.START);
   const [isFirstPlayer, setIsFirstPlayer] = useState(true);
   const [fieldSize, setfieldSize] = useState(10);
 
   const handleTileClick = (x, y) => {
-    if (gameState === 1) {
+    if (gameState === gamePhase.GAME) {
       let newField = [...field];
       isFirstPlayer ? (newField[x][y] = 1) : (newField[x][y] = 2);
       setfield(newField);
       if (checkWinner(x, y, fieldSize, field)) {
-        setgameState(2);
+        setgameState(gamePhase.WINNER);
       } else if (checkDraw(field)) {
-        setgameState(3);
+        setgameState(gamePhase.DRAW);
       } else {
         setIsFirstPlayer(!isFirstPlayer);
       }
@@ -51,7 +57,7 @@ const Game = () => {
     <div>
       <h1>Amőba</h1>
 
-      {gameState === 0 && (
+      {gameState === gamePhase.START && (
         <GameStart
           handleSubmit={handleSubmit}
           handleFieldSizeChange={handleFieldSizeChange}
@@ -59,7 +65,7 @@ const Game = () => {
         />
       )}
 
-      {gameState === 2 && (
+      {gameState === gamePhase.WINNER && (
         <div>
           <p>
             Játék vége. A győztes: {isFirstPlayer ? "Játékos1" : "Játékos2"}
@@ -68,14 +74,16 @@ const Game = () => {
         </div>
       )}
 
-      {gameState === 3 && (
+      {gameState === gamePhase.DRAW && (
         <div>
           <p>Játék vége. Döntetlen.</p>
           <button onClick={handleStartNewGameClick}>Új játék</button>
         </div>
       )}
 
-      {gameState === 1 && <p>{isFirstPlayer ? "Játékos: 1" : "Játékos: 2"}</p>}
+      {gameState === gamePhase.GAME && (
+        <p>{isFirstPlayer ? "Játékos: 1" : "Játékos: 2"}</p>
+      )}
 
       {gameState && <Field field={field} handleTileClick={handleTileClick} />}
     </div>
