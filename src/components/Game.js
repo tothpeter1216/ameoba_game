@@ -16,6 +16,8 @@ const Game = () => {
     gameState: gamePhase.START,
     isFirstPlayer: true,
     fieldSize: 10,
+    player1: "játékos1",
+    player2: "játékos2",
   });
 
   const handleTileClick = (x, y) => {
@@ -48,7 +50,8 @@ const Game = () => {
   };
 
   const handleFieldSizeChange = (e) => {
-    setGameData({ ...gameData, fieldSize: e.target.value });
+    // setGameData({ ...gameData, fieldSize: e.target.value });
+    setGameData({ ...gameData, [e.target.name]: e.target.value });
   };
 
   const handleStartNewGameClick = () => {
@@ -58,6 +61,9 @@ const Game = () => {
   return (
     <div>
       <h1>Amőba</h1>
+      <p>
+        {gameData.player1} (X) vs {gameData.player2} (O)
+      </p>
 
       {gameData.gameState === gamePhase.START && (
         <GameStart
@@ -71,7 +77,7 @@ const Game = () => {
         <div>
           <p>
             Játék vége. A győztes:{" "}
-            {gameData.isFirstPlayer ? "Játékos1" : "Játékos2"}
+            {gameData.isFirstPlayer ? gameData.player1 : gameData.player2}
           </p>
           <button onClick={handleStartNewGameClick}>Új játék</button>
         </div>
@@ -86,7 +92,11 @@ const Game = () => {
 
       {gameData.gameState === gamePhase.GAME && (
         <div>
-          <p>{gameData.isFirstPlayer ? "Játékos: X" : "Játékos: O"}</p>
+          <p>
+            {gameData.isFirstPlayer
+              ? "Következik: " + gameData.player1 + " (X)"
+              : gameData.player2 + " (O)"}
+          </p>
           <button onClick={handleStartNewGameClick}>Új játék</button>
         </div>
       )}
