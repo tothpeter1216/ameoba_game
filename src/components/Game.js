@@ -82,10 +82,15 @@ const Game = () => {
       )}
 
       {gameState === gamePhase.GAME && (
-        <p>{isFirstPlayer ? "Játékos: 1" : "Játékos: 2"}</p>
+        <div>
+          <p>{isFirstPlayer ? "Játékos: X" : "Játékos: O"}</p>
+          <button onClick={handleStartNewGameClick}>Új játék</button>
+        </div>
       )}
 
-      {gameState && <Field field={field} handleTileClick={handleTileClick} />}
+      {gameState !== gamePhase.START && (
+        <Field field={field} handleTileClick={handleTileClick} />
+      )}
     </div>
   );
 };
