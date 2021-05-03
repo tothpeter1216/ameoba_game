@@ -1,70 +1,23 @@
-# Getting Started with Create React App
+# Klasszikus amőba játék
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A játék online elrhető: [https://greytictactoe.herokuapp.com/]
+A játékot két személy játszhatja, egy böngészőben. A játék kezdetekor add meg a pálya méretét (minimum 5x5 - maximum 15x15), illetve a játékosok nevét.
+A játék addig tart, amíg valamelyik játékos nem foglal el 5 egymás mellett lévő mezőt (horizontálisan, vertikálisan vagy átlósan). A játék alatt a mező fölött látható, hogy ki következik. A játékot az "Új játék" gombbal megszakíthatjuk.
+A játék végén a mező fölött megjelenik a győztes neve (vagy döntetlen), az "Új játék" gombbal pedig kezdődhet a visszavágó.
 
-## Available Scripts
+![Játék](TTTStart.png)
 
-In the project directory, you can run:
+![Játék](TTTGame.png)
+
+## Felhasznált technológiák
+
+HTML, CSS, React.js
+
+## A kód futtatása
+
+A projekt mappájában futtasd:
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Fejlesztői módban fut a játék.\
+Nyisd meg a [http://localhost:3000](http://localhost:3000) -t hogy lásd a jétkot a böngészőben.
