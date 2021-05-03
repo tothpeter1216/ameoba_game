@@ -3,6 +3,7 @@ import { checkWinner, checkDraw } from "../utilityFunctions/checkWinner";
 import Field from "./Field";
 import GameStart from "./GameStart";
 
+// a játék lehetséges fázisai enumként
 let gamePhase = {
   START: 0,
   GAME: 1,
@@ -11,6 +12,9 @@ let gamePhase = {
 };
 
 const Game = () => {
+  // A játékhoz szükséges adatok.
+  // A field a fieldsize input alapján dinamikusan feltöltött.
+  // A játékos nevek szintén inputra változnak
   const [gameData, setGameData] = useState({
     field: [],
     gameState: gamePhase.START,
@@ -20,6 +24,8 @@ const Game = () => {
     player2: "játékos2",
   });
 
+  // A pályára érkező kattintások kezelése. Csak a játék fázisban, figyelembe véve, hogy ki az aktuális játékos.
+  // A módosítás után ellenőrzés, hogy győzött-e a játékos vagy betelt-e az összes mező (döntetlen)
   const handleTileClick = (x, y) => {
     if (gameData.gameState === gamePhase.GAME) {
       let newField = [...gameData.field];
@@ -35,6 +41,8 @@ const Game = () => {
     }
   };
 
+  // A játék elindtása után a fieldsize alapján elkotódik meg a field mátrix,
+  // a gamestate pedig átvált, kezdődik a játék
   const handleSubmit = (e) => {
     e.preventDefault();
     let newField = [];
@@ -45,15 +53,15 @@ const Game = () => {
       }
       newField.push(newRow);
     }
-    console.log(newField);
     setGameData({ ...gameData, field: newField, gameState: gamePhase.GAME });
   };
 
+  // A fieldsize mező inputját kezeli
   const handleFieldSizeChange = (e) => {
-    // setGameData({ ...gameData, fieldSize: e.target.value });
     setGameData({ ...gameData, [e.target.name]: e.target.value });
   };
 
+  // Az új játék gombra kattintva a gamestate startra vált
   const handleStartNewGameClick = () => {
     setGameData({ ...gameData, gameState: gamePhase.START });
   };
@@ -61,10 +69,12 @@ const Game = () => {
   return (
     <div>
       <h1>Amőba</h1>
+      {/* nevek megjelenítése */}
       <p>
         {gameData.player1} (X) vs {gameData.player2} (O)
       </p>
 
+      {/* a játék kezdeti szakasza */}
       {gameData.gameState === gamePhase.START && (
         <GameStart
           handleSubmit={handleSubmit}
@@ -73,16 +83,20 @@ const Game = () => {
         />
       )}
 
+      {/* Győztes kiírása a játék végén */}
       {gameData.gameState === gamePhase.WINNER && (
         <div>
           <p>
             Játék vége. A győztes:{" "}
-            {gameData.isFirstPlayer ? gameData.player1 : gameData.player2}
+            {gameData.isFirstPlayer
+              ? gameData.player1 + " (X)"
+              : gameData.player2 + " (O)"}
           </p>
           <button onClick={handleStartNewGameClick}>Új játék</button>
         </div>
       )}
 
+      {/* kiírás döntetlen esetén */}
       {gameData.gameState === gamePhase.DRAW && (
         <div>
           <p>Játék vége. Döntetlen.</p>
@@ -90,17 +104,19 @@ const Game = () => {
         </div>
       )}
 
+      {/* soron következő játékos kiírása */}
       {gameData.gameState === gamePhase.GAME && (
         <div>
           <p>
             {gameData.isFirstPlayer
               ? "Következik: " + gameData.player1 + " (X)"
-              : gameData.player2 + " (O)"}
+              : "Következik: " + gameData.player2 + " (O)"}
           </p>
           <button onClick={handleStartNewGameClick}>Új játék</button>
         </div>
       )}
 
+      {/* A játékmező megjelenítése */}
       {gameData.gameState !== gamePhase.START && (
         <Field field={gameData.field} handleTileClick={handleTileClick} />
       )}

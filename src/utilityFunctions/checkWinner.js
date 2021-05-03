@@ -12,23 +12,13 @@ const checkVerticalWinner = (x, y, fieldSize, field) => {
   let yPos = y;
   let point = 0;
   let type = field[x][y];
-  while (
-    // xPos >= 0 &&
-    // xPos <= fieldSize &&
-    field[xPos] !== undefined &&
-    field[xPos][yPos] === type
-  ) {
+  while (field[xPos] !== undefined && field[xPos][yPos] === type) {
     xPos++;
     point++;
   }
   xPos = x - 1;
   yPos = y;
-  while (
-    // xPos >= 0 &&
-    // xPos <= fieldSize &&
-    field[xPos] !== undefined &&
-    field[xPos][yPos] === type
-  ) {
+  while (field[xPos] !== undefined && field[xPos][yPos] === type) {
     xPos--;
     point++;
   }
@@ -114,6 +104,3 @@ export const checkDraw = (field) => {
     return true;
   }
 };
-
-// export default checkWinner;
-// export { checkWinner, checkDraw };
